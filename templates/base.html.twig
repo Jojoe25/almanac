@@ -1,29 +1,36 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% block title %}Almanac!{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Spice&display=swap" rel="stylesheet">
+
+    <link rel="icon" href ="{{ asset ('img/icon.png')}}">
 
 </head>
 
 <body>
+    <div class="container">
+        <header>
+        <h1><a href="{{ path('main_home') }}"></a> <img src="{{ asset('img/logo.svg') }}" alt="Almanac!"></h1>
+            {% include('inc/nav.html.twig') %}
+        </header>
 
-    <header>
-    <h1>Almanac!</h1>
-        {%  include('inc/nav.html.twig') %}
-    </header>
+        <main>
+            {% block body %}{%  endblock %}
+        </main>
 
-    <main>
-        {% block body %}{%  endblock %}
-    </main>
-
-    <footer>
-        {%  include('inc/nav.html.twig') %}
-        <div>&copy; {{ "now"|date("Y") }} Almanac!</div>
-    </footer>
-
+        <footer>
+            {% include('inc/nav.html.twig') %}
+            <div>&copy; {{ "now"|date("Y") }} Almanac!</div>
+        </footer>
+    </div>
 
 </body>
 
