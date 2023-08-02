@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(#000000, #132135);
+    background: linear-gradient(#ffffff, #abe2f5);
     background-attachment: fixed;
     color: #EEE;
     font-family: 'Bungee Spice', cursive;
@@ -48,10 +48,10 @@ nav li {
     margin-right: 1rem;
 }
 
-.series-list {
+.games-list {
     display: grid;
     grid-gap: 10px;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
 }
 
 label {
