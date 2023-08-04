@@ -7,7 +7,16 @@ Create a new game | {{ parent() }}
 
 {% block body %}
     <div>
-        {#  todo: afficher le formulaire #}
+
+        {# je décompose l'affichage du formulaire #}
+        {{form_start(gameForm)}} {# form start pour ouvrir la balise form #}
+
+        {{form_widget(gameForm)}} {# form widget pour afficher tout mes champs d'un coup #}
+
+        <button>Create !</button> {# bouton submit. #}
+
+        {{form_end(gameForm)}} {# form end pour fermer la balise form #}
     </div>
+
 {% endblock %}
 

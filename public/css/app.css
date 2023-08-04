@@ -61,10 +61,10 @@ label {
 input,
 textarea,
 select {
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     box-sizing: border-box;
-    width: 150px;
-    max-width: 50%;
+    width: 250px;
+    max-width: 60%;
 }
 
 .flash {
@@ -77,18 +77,18 @@ select {
 
 .flash-success {background-color: lawngreen}
 
-.serie-details {
+.game-details {
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 30px;
 }
 
-.serie-details-infos > div {
+.game-details-infos > div {
     margin-bottom: 1rem;
 }
 
 @media screen and (min-width: 700px) {
-    .serie-details {
+    .game-details {
         grid-template-columns: 300px 1fr;
     }
 }

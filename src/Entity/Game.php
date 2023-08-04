@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\GameRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=GameRepository::class)
@@ -18,16 +19,20 @@ class Game
     private $id;
 
     /**
+     * @Assert\NotBlank(message="Please provide a title for the game!")
+     * @Assert\Length(max={255})
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
+     * @Assert\Length(max={255})
      * @ORM\Column(type="text", nullable=true)
      */
     private $overview;
 
     /**
+     * @Assert\Range(min="0", max="10", notInRangeMessage="You are not in range dude!")
      * @ORM\Column(type="decimal", precision=3, scale=1)
      */
     private $vote;
@@ -43,6 +48,7 @@ class Game
     private $genres;
 
     /**
+     * @Assert\LessThanOrEqual("today", message="La date de publication doit être inférieure ou égale à la date actuelle.")
      * @ORM\Column(type="date")
      */
     private $publicationDate;

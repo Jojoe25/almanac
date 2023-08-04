@@ -21,6 +21,36 @@ class GameRepository extends ServiceEntityRepository
         parent::__construct($registry, Game::class);
     }
 
+    public function findBestGames()
+    {
+/*
+        //en DQL
+        $entityManager = $this->getEntityManager();
+        $dql = "
+            SELECT g
+            FROM App\Entity\Game g
+            WHERE g.vote > 8
+            ORDER BY g.vote DESC
+        ";
+
+        $query = $entityManager->createQuery($dql);
+        $results = $query->getResult();
+
+        dump($results);
+        return $results;
+*/
+
+        //Version QueryBuilder
+        $queryBuilder = $this->createQueryBuilder('g');
+        $queryBuilder->andWhere('g.vote > 5');
+        $queryBuilder->addOrderBy('g.vote', 'DESC');
+        $query = $queryBuilder->getQuery();
+
+        $query -> setMaxResults(50);
+        $results = $query->getResult();
+        return $results;
+
+    }
     public function add(Game $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);

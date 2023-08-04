@@ -5,16 +5,42 @@
 {% endblock %}
 
 {% block body %}
+ <div class="game-details">
 
- <h2> {{ game.name }}</h2>
+    <div>
+    <img src="{{ asset("img/posters/games/" ~ game.poster) }}" alt="{{ game.name }}">
+    </div>
 
- <div>{{ game.overview|nl2br }}</div>
+    <div class="game-details-infos">
 
- <div>User ratings: {{ game.vote }}</div>
+     <h2> {{ game.name }}</h2>
 
- <div>Categorized in : {{ game.genres }}</div>
+     <div>{{ game.overview|nl2br }}</div>
 
- <div>Gaming platform: {{ game.platform }}</div>
+     <div>User ratings: {{ game.vote }}</div>
+
+     <div>Categorized in : {{ game.genres }}</div>
+
+     <div>Gaming platform: {{ game.platform }}</div>
+
+     <div>Publication date: {{ game.publicationDate|date("Y-m-d") }}</div>
+
+     <div>Creation Date of this page: {{ game.dateCreated|date("Y-m-d") }}</div>
+
+     <div>Modification Date of this page: {{ game.dateModified|date("Y-m-d") }}</div>
+
+     </div>
+ </div>
+
 
 {% endblock %}
 
+{% block extrastyles %}
+ <style>
+  body {
+   background-image: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.7)), url("{{ asset('img/backdrops/' ~ game.backdrop) }}");
+   background-size: cover;
+   background-position: center;
+  }
+ </style>
+{% endblock %}
