@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Game;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -42,13 +43,18 @@ class GameRepository extends ServiceEntityRepository
 
         //Version QueryBuilder
         $queryBuilder = $this->createQueryBuilder('g');
+
+        $queryBuilder->leftJoin('g.walkthroughs', 'walk')
+            ->addSelect('walk');
+
         $queryBuilder->andWhere('g.vote > 5');
         $queryBuilder->addOrderBy('g.vote', 'DESC');
         $query = $queryBuilder->getQuery();
 
-        $query -> setMaxResults(50);
-        $results = $query->getResult();
-        return $results;
+        $query -> setMaxResults(25);
+
+        $paginator = new Paginator($query);
+        return $paginator;
 
     }
     public function add(Game $entity, bool $flush = false): void

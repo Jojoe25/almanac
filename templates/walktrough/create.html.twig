@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Create a new soluce ! | {{ parent() }}
+
+{% endblock %}
+
+{% block body %}
+
+    <div>
+
+        {# je décompose l'affichage du formulaire #}
+        {{form_start(walkthroughForm)}} {# form start pour ouvrir la balise form #}
+
+        {{form_widget(walkthroughForm)}} {# form widget pour afficher tout mes champs d'un coup #}
+
+        <button>Create !</button> {# bouton submit. #}
+
+        {{form_end(walkthroughForm)}} {# form end pour fermer la balise form #}
+    </div>
+
+{% endblock %}

@@ -36,10 +36,12 @@ class GameController extends AbstractController
     {
         // On récupère un jeu en fonction de son identifiant (id) depuis le référentiel (repository) des jeux.
         $game = $gameRepository->find($id);
+
         return $this->render('games/details.html.twig', [
             "game" => $game
         ]);
     }
+
 
     /**
      * @Route("create", name="create")

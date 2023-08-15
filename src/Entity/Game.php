@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\GameRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -72,6 +74,16 @@ class Game
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $dateModified;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Walkthrough::class, mappedBy="game")
+     */
+    private $walkthroughs;
+
+    public function __construct()
+    {
+        $this->walkthroughs = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -194,6 +206,36 @@ class Game
     public function setDateModified(?\DateTimeInterface $dateModified): self
     {
         $this->dateModified = $dateModified;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Walkthrough>
+     */
+    public function getWalkthroughs(): Collection
+    {
+        return $this->walkthroughs;
+    }
+
+    public function addWalkthrough(Walkthrough $walkthrough): self
+    {
+        if (!$this->walkthroughs->contains($walkthrough)) {
+            $this->walkthroughs[] = $walkthrough;
+            $walkthrough->setGame($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWalkthrough(Walkthrough $walkthrough): self
+    {
+        if ($this->walkthroughs->removeElement($walkthrough)) {
+            // set the owning side to null (unless already changed)
+            if ($walkthrough->getGame() === $this) {
+                $walkthrough->setGame(null);
+            }
+        }
 
         return $this;
     }

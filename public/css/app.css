@@ -1,8 +1,8 @@
 body {
-    background: linear-gradient(#ffffff, #abe2f5);
+    background: linear-gradient(#1c1717, #abe2f5);
     background-attachment: fixed;
     color: #EEE;
-    font-family: 'Bungee Spice', cursive;
+    font-family: 'Indie Flower', cursive;
 }
 
 .container {
@@ -54,17 +54,31 @@ nav li {
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
 }
 
+.games-list img {
+    width: 270px;
+    height: 270px;
+    object-fit: fill;
+}
+
 label {
     display: block;
+    margin-bottom: 1rem;
 }
 
 input,
 textarea,
 select {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     box-sizing: border-box;
     width: 250px;
     max-width: 60%;
+}
+
+.checkbox label {
+    display: flex;
+    align-items: center;
+    white-space: nowrap; /* Prevents text from wrapping */
+    width: 100px;
 }
 
 .flash {

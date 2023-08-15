@@ -1,8 +1,27 @@
 <nav>
     <ul>
         <li><a href="{{ path('main_home') }}" title="Home">Home</a></li>
-        <li><a href="{{ path('main_test') }}" title="Test">Test</a></li>
-        <li><a href="{{ path('games_list') }}" title="All Games">Games</a></li>
-        <li><a href="{{ path('games_create') }}" title="Create a new game">Create</a></li>
+
+        {% if app.user %}
+
+            <li><a href="{{ path("app_logout") }}" title="Logout">Logout ({{ app.user.firstname }})</a></li>
+
+            {% if is_granted("ROLE_USER") %}
+                <li><a href="{{ path('games_list') }}" title="All Games">Games</a></li>
+            {% endif %}
+
+            {% if is_granted("ROLE_ADMIN") %}
+                <li><a href="{{ path('games_list') }}" title="All Games">Games</a></li>
+                <li><a href="{{ path("admin_dashboard") }}" title="Admin dashboard">Admin</a></li>
+                <li><a href="{{ path('games_create') }}" title="Create a new game!">Add new Game</a></li>
+                <li><a href="{{ path('walktrough_create') }}" title="Create a new soluce!">Add new walkthrough</a></li>
+            {% endif %}
+
+        {% else %}
+
+            <li><a href="{{ path("app_login") }}" title="Login">Login</a></li>
+            <li><a href="{{ path("app_register") }}" title="Create account">Register</a></li>
+
+        {% endif %}
     </ul>
 </nav>
