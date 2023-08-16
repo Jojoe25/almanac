@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Game;
+use App\Entity\PropertySearch;
 use App\Form\GameType;
+use App\Form\PropertySearchType;
 use App\Repository\GameRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,11 +23,17 @@ class GameController extends AbstractController
     /**
      * @Route("", name="list")
      */
-    public function list(GameRepository $gameRepository): Response
+    public function list(GameRepository $gameRepository, Request $request): Response
     {
         $games = $gameRepository->findBestGames();
+
+        $search = new PropertySearch();
+        $searchForm = $this->createForm(PropertySearchType::class, $search);
+
+        $searchForm->handleRequest($request);
         return $this->render('games/list.html.twig', [
-            "games" => $games
+            "games" => $games,
+            "searchForm" => $searchForm->createView(),
         ]);
     }
 

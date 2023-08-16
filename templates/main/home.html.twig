@@ -1,7 +1,14 @@
 {%  extends 'base.html.twig' %}
 
+{% block extrastyles %}
+    <link rel="stylesheet" href="{{ asset('css/home.css') }}"> <!-- Nouveau fichier de styles pour la page d'accueil -->
+{% endblock %}
+
 {% block body %}
-    <h1>Coucou</h1>
+    <section class="hero">
+        <h1>L'Almanac des jeux rétro</h1>
+        <p>Explorez notre vaste collection de jeux rétro et revivez les souvenirs du passé.</p>
+    </section>
 {%  endblock %}
 
 {% block title %} {{ parent() }} | Home {% endblock %}

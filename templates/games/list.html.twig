@@ -2,6 +2,19 @@
 
 {% block body %}
 
+    <div class="jumbotron">
+        <div class="container">
+            {{form_start(searchForm)}} {# form start pour ouvrir la balise form #}
+
+            {{form_widget(searchForm)}} {# form widget pour afficher tout mes champs d'un coup #}
+
+            <button>Search !</button> {# bouton submit. #}
+
+            {{form_end(searchForm)}} {# form end pour fermer la balise form #}
+
+        </div>
+    </div>
+
     <section class="games-list">
         {% for game in games %}
         <article>
@@ -11,6 +24,7 @@
                 <img src="{{ asset('img/posters/games/' ~ game.poster ) }}" alt="{{ game.name }}">
             </a>
         </article>
+
         {% endfor %}
     </section>
 

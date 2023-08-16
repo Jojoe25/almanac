@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Game;
+use App\Entity\PropertySearch;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
@@ -74,6 +75,16 @@ class GameRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    public function filtre(PropertySearch $propertySearch)
+    {
+
+        $query = $this->createQueryBuilder('g');
+
+        $query->andWhere('g.genres = :genres')
+            ->setParameter('genres', $propertySearch->getGenres());
+        }
+
 
 //    /**
 //     * @return Game[] Returns an array of Game objects

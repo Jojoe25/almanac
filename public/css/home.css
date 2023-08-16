@@ -1,0 +1,8 @@
+.hero {
+    background-image: url('https://e0.pxfuel.com/wallpapers/467/46/desktop-wallpaper-retro-wave-resolution-background-and-1600x1200-retro-gaming.jpg'); /* Remplacez par le chemin vers votre image de fond */
+    background-size: cover;
+    background-position: center center; /* Centre l'image horizontalement et verticalement */
+    text-align: center;
+    padding: 100px 0;
+    color: #fff;
+}
