@@ -26,9 +26,19 @@ class GameController extends AbstractController
         $games = $gameRepository->findBestGames();
 
         $search = new PropertySearch();
+
         $searchForm = $this->createForm(PropertySearchType::class, $search);
 
         $searchForm->handleRequest($request);
+        if ($searchForm->isSubmitted()) {
+
+            $games = $gameRepository->filtre($search);
+
+        } else {
+
+            $games = $gameRepository->findBestGames();;
+
+        }
         return $this->render('games/list.html.twig', [
             "games" => $games,
             "searchForm" => $searchForm->createView(),

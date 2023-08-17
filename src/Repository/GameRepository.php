@@ -22,25 +22,40 @@ class GameRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Game::class);
     }
+    public function findDistinctGenres()
+    {
+        return $this->createQueryBuilder('g')
+            ->select('DISTINCT g.genres')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findDistinctPlatforms()
+    {
+        return $this->createQueryBuilder('g')
+            ->select('DISTINCT g.platform')
+            ->getQuery()
+            ->getResult();
+    }
 
     public function findBestGames()
     {
-/*
-        //en DQL
-        $entityManager = $this->getEntityManager();
-        $dql = "
-            SELECT g
-            FROM App\Entity\Game g
-            WHERE g.vote > 8
-            ORDER BY g.vote DESC
-        ";
+        /*
+                //en DQL
+                $entityManager = $this->getEntityManager();
+                $dql = "
+                    SELECT g
+                    FROM App\Entity\Game g
+                    WHERE g.vote > 8
+                    ORDER BY g.vote DESC
+                ";
 
-        $query = $entityManager->createQuery($dql);
-        $results = $query->getResult();
+                $query = $entityManager->createQuery($dql);
+                $results = $query->getResult();
 
-        dump($results);
-        return $results;
-*/
+                dump($results);
+                return $results;
+        */
 
         //Version QueryBuilder
         $queryBuilder = $this->createQueryBuilder('g');
@@ -76,15 +91,32 @@ class GameRepository extends ServiceEntityRepository
         }
     }
 
+    /*  public function filtre(PropertySearch $propertySearch)
+      {
+
+          $query = $this->createQueryBuilder('g');
+
+          $query->andWhere('g.genres = :genres')
+              ->setParameter('genres', $propertySearch->getGenres());
+          }*/
     public function filtre(PropertySearch $propertySearch)
     {
-
         $query = $this->createQueryBuilder('g');
 
-        $query->andWhere('g.genres = :genres')
-            ->setParameter('genres', $propertySearch->getGenres());
+        if ($propertySearch->getGenres()) {
+            $query->andWhere('g.genres = :genres')
+                ->setParameter('genres', $propertySearch->getGenres());
         }
 
+        if ($propertySearch->getPlatform()) {
+            $query->andWhere('g.platform = :platform')
+                ->setParameter('platform', $propertySearch->getPlatform());
+        }
+
+        // Ajoutez d'autres conditions de filtrage facultatives ici si nÃ©cessaire
+
+        return $query->getQuery()->getResult();
+    }
 
 //    /**
 //     * @return Game[] Returns an array of Game objects
