@@ -1,0 +1,61 @@
+/* nav-style.css */
+
+/* Styles du menu principal */
+nav {
+    display: flex;
+    justify-content: center; /* Centre horizontalement le menu */
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background-color: #090808;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+nav li {
+    margin: 0;
+}
+
+nav a {
+    display: block;
+    padding: 10px 20px;
+    color: #EEE;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+nav a:hover {
+    background-color: #ead47b;
+    color: #090808;
+}
+
+/* Effet d'animation sur les liens */
+@keyframes slideIn {
+    from {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Styles pour la version responsive */
+@media screen and (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    nav li {
+        margin: 10px 0;
+    }
+}

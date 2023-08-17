@@ -11,17 +11,23 @@ body {
     padding: 5px;
 }
 
-.hero {
-    background-image: url('hero-image.jpg'); /* Remplacez par le chemin vers votre image de fond */
-    background-size: cover;
-    text-align: center;
-    padding: 100px 0;
-    color: #fff;
-}
-
 a {
     color: inherit;
     text-decoration: none;
+}
+
+.text-left {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    margin-right: 10px;
+    font-family: 'Nabla', cursive;
+}
+
+.icon-and-text {
+    display: flex;
+    align-items: center;
 }
 
 a:hover {
@@ -44,16 +50,6 @@ header img {
 
 main {
     flex: 1;
-}
-
-nav ul {
-    display: flex;
-    list-style: none;
-    padding-left: 0;
-}
-
-nav li {
-    margin-right: 1rem;
 }
 
 .games-list {
@@ -116,6 +112,64 @@ select {
 
 .walkthrough-link a:hover {
     color: darkgray; /* Couleur lorsque le lien est survolé */
+}
+
+.filtres {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.filtres .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.filtres form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.filtres button {
+    background-color: #BC956B;
+    color: #FFF;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.filtres button:hover {
+    background-color: #8C734E;
+}
+
+.filtres input[type="text"],
+.filtres select {
+    padding: 10px;
+    border: 1px solid #CCC;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.image-container {
+    background-image: url('https://e0.pxfuel.com/wallpapers/467/46/desktop-wallpaper-retro-wave-resolution-background-and-1600x1200-retro-gaming.jpg');
+    background-size: contain;
+    background-position: right center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+}
+
+/* Ajustez la hauteur de l'image selon vos besoins */
+.image-container::before {
+    content: '';
+    flex: 0 0 30px; /* Ajustez la hauteur de l'image ici */
 }
 
 @media screen and (min-width: 700px) {
