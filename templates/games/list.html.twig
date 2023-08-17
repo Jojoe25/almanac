@@ -16,6 +16,7 @@
     </div>
 
     <section class="games-list">
+
         {% for game in games %}
         <article>
             <a href="{{path('games_details', {'id' : game.id}) }}"
@@ -24,8 +25,8 @@
                 <img src="{{ asset('img/posters/games/' ~ game.poster ) }}" alt="{{ game.name }}">
             </a>
         </article>
-
         {% endfor %}
+
     </section>
 
 {% endblock %}

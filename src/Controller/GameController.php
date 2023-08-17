@@ -12,8 +12,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @Route("/games", name="games_")
@@ -50,6 +48,18 @@ class GameController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("walk/{id}", name="walk")
+     */
+    public function walk(int $id, GameRepository $gameRepository): Response
+    {
+        // On récupère un jeu en fonction de son identifiant (id) depuis le référentiel (repository) des jeux.
+        $game = $gameRepository->find($id);
+
+        return $this->render('games/walk.html.twig', [
+            "game" => $game
+        ]);
+    }
 
     /**
      * @Route("create", name="create")

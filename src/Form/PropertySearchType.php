@@ -15,15 +15,13 @@ class PropertySearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('platform', ChoiceType::class,[
-                'required' => false,
-                'label' => false,
-                'attr' => [ 'placeholder' => 'Platform']
-        ])
-            ->add('genres', ChoiceType::class,[
-                'required' => false,
-                'label' => false,
-                'attr' => [ 'placeholder' => 'Genres']
+            ->add('platform', EntityType::class, [
+                'class' => Game::class,
+                'choice_label' => 'platform'
+            ])
+            ->add('genres', EntityType::class, [
+                'class' => Game::class,
+                'choice_label' => 'genres'
             ])
         ;
     }
