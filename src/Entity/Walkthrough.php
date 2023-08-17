@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\WalkthroughRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=WalkthroughRepository::class)
@@ -18,10 +19,11 @@ class Walkthrough
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="Please provide a title for the walkthrough!")
+     * @Assert\Length(max={255})
+     * @ORM\Column(type="string", length=255)
      */
-    private $number;
-
+    private $name;
     /**
      * @ORM\Column(type="datetime")
      */
@@ -46,18 +48,6 @@ class Walkthrough
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getNumber(): ?int
-    {
-        return $this->number;
-    }
-
-    public function setNumber(int $number): self
-    {
-        $this->number = $number;
-
-        return $this;
     }
 
     public function getDateCreated(): ?\DateTimeInterface
@@ -107,4 +97,23 @@ class Walkthrough
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     * @return Walkthrough
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+        return $this;
+    }
+
 }

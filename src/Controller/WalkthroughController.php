@@ -22,11 +22,19 @@ class WalkthroughController extends AbstractController
 
         $walkthroughForm->handleRequest($request);
 
+        // Si le formulaire a été soumis et est valide, on enregistre le jeu dans la base de données.
         if ($walkthroughForm->isSubmitted() && $walkthroughForm->isValid()){
             $entityManager->persist($walkthrough);
             $entityManager->flush();
+
             // On ajoute un message flash de succès pour indiquer que le nouveau jeu a été ajouté.
             $this->addFlash('success', 'New Soluce added! Goodjob!! Lets PLAY!! ;-) ');
+
+            // Récupérer l'ID du jeu associé au guide
+            $gameId = $walkthrough->getGame()->getId();
+
+            // Rediriger vers la page "walk" du même jeu
+            return $this->redirectToRoute('games_walk', ['id' => $gameId]);
         }
 
         return $this->render('walktrough/create.html.twig', [

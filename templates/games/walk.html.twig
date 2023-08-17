@@ -14,16 +14,15 @@
 
         <div class="game-details-infos">
 
-            <h2> {{ game.name }}</h2>
+            <h2> {{ game.name }} Walktroughs :</h2>
 
             <section class="walktroughs">
-                <h3>Walktroughs :</h3>
                 {%  for walktrough in game.walkthroughs %}
                     <article>
                         <div>
-                            <h4> Walktrough {{ walktrough.number }}</h4>
+                            <h4> Walkthrough {{ walktrough.name }}</h4>
                             {% if walktrough.overview  %}
-                                <div>{{ walktrough.overview }}</div>
+                                <div>Overview : {{ walktrough.overview }}</div>
                             {% endif %}
                         </div>
                     </article>

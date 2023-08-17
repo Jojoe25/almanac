@@ -7,30 +7,28 @@
 {% block body %}
  <div class="game-details">
 
-    <div>
-    <img src="{{ asset("img/posters/games/" ~ game.poster) }}" alt="{{ game.name }}">
-    </div>
+    <div><img src="{{ asset("img/posters/games/" ~ game.poster) }}" alt="{{ game.name }}"></div>
 
     <div class="game-details-infos">
 
-     <h2> {{ game.name }}</h2>
+      <h2> {{ game.name }}</h2>
 
-     <div>{{ game.overview|nl2br }}</div>
+      <div>{{ game.overview|nl2br }}</div>
 
-     <div>User ratings: {{ game.vote }}</div>
+      <div>User ratings: {{ game.vote }}</div>
 
-     <div>Categorized in : {{ game.genres }}</div>
+      <div>Categorized in : {{ game.genres }}</div>
 
-     <div>Gaming platform: {{ game.platform }}</div>
+      <div>Gaming platform: {{ game.platform }}</div>
 
-     <div>Publication date: {{ game.publicationDate|date("Y-m-d") }}</div>
+      <div>Publication date: {{ game.publicationDate|date("Y-m-d") }}</div>
 
-     <div>Creation Date of this page: {{ game.dateCreated|date("Y-m-d") }}</div>
+      <div>Creation Date of this page: {{ game.dateCreated|date("Y-m-d") }}</div>
 
-     <div>Modification Date of this page: {{ game.dateModified|date("Y-m-d") }}</div>
-     <div>
-      <a href="{{ path('games_walk', {'id': game.id}) }}">View Walkthrough</a>
-     </div>
+      <div>Modification Date of this page: {{ game.dateModified|date("Y-m-d") }}</div>
+
+      <div class="walkthrough-link"><a href="{{ path('games_walk', {'id': game.id}) }}">View Walkthrough !! <--- CLICK HERE</a></div>
+
      </div>
 
  </div>

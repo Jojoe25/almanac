@@ -109,6 +109,15 @@ select {
     margin-bottom: 1rem;
 }
 
+.walkthrough-link a {
+    color: darkcyan; /* Couleur par défaut */
+    transition: color 0.3s; /* Ajoutez une transition fluide pour le changement de couleur */
+}
+
+.walkthrough-link a:hover {
+    color: darkgray; /* Couleur lorsque le lien est survolé */
+}
+
 @media screen and (min-width: 700px) {
     .game-details {
         grid-template-columns: 300px 1fr;

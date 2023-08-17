@@ -14,7 +14,7 @@ class WalkthroughType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('number')
+            ->add('name')
             ->add('dateCreated')
             ->add('overview')
             ->add('dateModified')
