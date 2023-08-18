@@ -162,6 +162,7 @@ class Game
         return $this;
     }
 
+
     public function getBackdrop(): ?string
     {
         return $this->backdrop;
@@ -185,7 +186,6 @@ class Game
 
         return $this;
     }
-
     public function getDateCreated(): ?\DateTimeInterface
     {
         return $this->dateCreated;

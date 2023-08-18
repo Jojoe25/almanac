@@ -7,11 +7,11 @@ use App\Entity\PropertySearch;
 use App\Form\GameType;
 use App\Form\PropertySearchType;
 use App\Repository\GameRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 /**
  * @Route("/games", name="games_")
@@ -58,6 +58,7 @@ class GameController extends AbstractController
         ]);
     }
 
+
     /**
      * @Route("walk/{id}", name="walk")
      */
@@ -70,42 +71,83 @@ class GameController extends AbstractController
             "game" => $game
         ]);
     }
-
+    /*  private function generateUniqueFileName(): string
+      {
+          return md5(uniqid());
+      }*/
     /**
      * @Route("create", name="create")
      */
-    public function create(
-        Request $request,
-        EntityManagerInterface $entityManager
-    ): Response
+    public function addGame(Request $request)
     {
-        // On crée un nouvel objet "Game".
         $game = new Game();
-        // On attribue directement la date de création du jeu (maintenant) car cela est absent du formulaire mais requis dans la base de données.
         $game->setDateCreated(new \DateTime());
-        // On attribue une valeur par défaut pour le champ "backdrop" (arrière-plan) et "poster" du jeu. TODO: À modifier pour permettre l'ajout direct d'une image en upload.
-        $game->setBackdrop(1);
-        $game->setPoster(1);
-        // On crée un formulaire pour le jeu en utilisant la classe de formulaire "GameType" et on le relie aux données de l'objet "Game" créé.
-        $gameForm = $this->createForm(GameType::class, $game);
-        // On traite la requête HTTP pour voir si le formulaire a été soumis.
-        $gameForm->handleRequest($request);
 
-        // Si le formulaire a été soumis et est valide, on enregistre le jeu dans la base de données.
-        if ($gameForm->isSubmitted() && $gameForm->isValid()) {
-            // On persiste l'objet "Game" pour qu'il soit géré par Doctrine.
+        $gameform = $this->createForm(GameType::class, $game);
+        $gameform->handleRequest($request);
+
+        if ($gameform->isSubmitted() && $gameform->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $backdropFile = $gameform->get('backdrop')->getData();
+            if ($backdropFile) {
+                // Generate a unique name for the file
+                $backdropFileName = md5(uniqid()) . '.' . $backdropFile->guessExtension();
+
+                // Move the file to the desired location
+                $backdropFile->move(
+                    $this->getParameter('kernel.project_dir') . '/public/img/backdrops',
+                    $backdropFileName
+                );
+
+                // Set the backdrop property to the filename
+                $game->setBackdrop($backdropFileName);
+            }
+            $posterFile = $gameform->get('poster')->getData();
+            if ($posterFile) {
+                $posterFileName = md5(uniqid()) . '.' . $posterFile->guessExtension();
+
+                // Move the file to the desired location
+                $posterFile->move(
+                    $this->getParameter('kernel.project_dir') . '/public/img/posters/games',
+                    $posterFileName);
+
+                $game->setPoster($posterFileName);
+            }
+
+            // Set other properties from the form
+            // ...
+
+            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($game);
-            // On exécute la requête pour enregistrer le jeu dans la base de données.
             $entityManager->flush();
+
             // On ajoute un message flash de succès pour indiquer que le nouveau jeu a été ajouté.
             $this->addFlash('success', 'New Game added! Goodjob!! Lets PLAY!! ;-) ');
-            // On redirige l'utilisateur vers la page des détails du jeu nouvellement créé.
+
             return $this->redirectToRoute('games_details', ['id' => $game->getId()]);
         }
 
-        // Si le formulaire n'a pas été soumis ou n'est pas valide, on affiche le formulaire de création du jeu.
         return $this->render('games/create.html.twig', [
-            'gameForm' => $gameForm->createView()
-        ]);
+            'gameForm' => $gameform->createView()]);
     }
+
+
+
+
+    /*  private function uploadFile($file)
+      {
+          $fileName = uniqid().'.'.$file->guessExtension();
+
+          try {
+              $file->move(
+                  $this->getParameter('your_upload_directory'), // Change this to the actual upload directory
+                  $fileName
+              );
+          } catch (FileException $e) {
+              // Handle the exception if needed
+          }
+
+          return $fileName;
+      }*/
 }

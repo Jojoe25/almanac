@@ -23,7 +23,7 @@ class GameType extends AbstractType
 
             ->add('name', TextType::class, [
                 'label' => 'Title'
-                ])
+            ])
             ->add('overview',null, [
                 'required' => false,
             ])
@@ -109,6 +109,16 @@ class GameType extends AbstractType
             ->add('publicationDate', DateType::class, [
                 'html5' => true,
                 'widget' => 'single_text',
+            ])
+            ->add('backdrop', FileType::class, [
+                'label' => 'Backdrop Image',
+                'required' => false,
+                'mapped' => false, // Indiquez que ce champ n'est pas lié directement à une propriété de l'entité
+            ])
+            ->add('poster', FileType::class, [
+                'label' => 'Poster Image',
+                'required' => false,
+                'mapped' => false, // Indiquez que ce champ n'est pas lié directement à une propriété de l'entité
             ])
 
             /*->add('backdrop', FileType::class, [

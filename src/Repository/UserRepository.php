@@ -41,7 +41,14 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             $this->getEntityManager()->flush();
         }
     }
+    public function changeUserRole(User $user, array $newRoles): void
+    {
+        // Mettre à jour les rôles de l'utilisateur
+        $user->setRoles($newRoles);
 
+        // Enregistrer les modifications en base de données
+        $this->getEntityManager()->flush();
+    }
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
      */

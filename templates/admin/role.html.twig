@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Liste des Utilisateurs</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom d'utilisateur</th>
+            <th>Rôles</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.lastname }}</td>
+                <td>{{ user.firstname }}</td>
+                <td>{{ user.roles | join(', ') }}</td>
+                <td>
+                    <form method="post" action="{{ path('admin_app_updateuserrole_changerole', {'id': user.id}) }}">
+                        <select name="newRole">
+                            <option value="ROLE_ADMIN">Admin</option>
+                            <option value="ROLE_USER">User</option>
+                            <option value="ROLE_EDITOR">Editor</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary">Changer le rôle</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block title %}
+    The best Retro Games | {{ parent() }}
+{% endblock %}
