@@ -1,61 +1,102 @@
-/* nav-style.css */
-
-/* Styles du menu principal */
-nav {
+/* Nouveau style pour la barre de navigation */
+.navbar {
+    background-color: #090808;
+    color: #EEE;
+    padding: 10px 0; /* Supprimez la marge horizontale */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     display: flex;
-    justify-content: center; /* Centre horizontalement le menu */
+    justify-content: center; /* Centre horizontalement */
+    align-items: center;
+    position: fixed; /* Fixez la barre en haut */
+    top: 0;
+    left: 0;
+    width: 100%; /* Prend toute la largeur de l'écran */
+    z-index: 100; /* Assurez-vous que la barre est au-dessus du contenu */
 }
 
-nav ul {
-    display: flex;
+.navbar-toggler {
+    display: none;
+    cursor: pointer;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: #EEE;
+    margin: 5px 0;
+    transition: 0.4s;
+}
+
+.nav-list {
     list-style: none;
+    display: flex;
     margin: 0;
     padding: 0;
-    background-color: #090808;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-nav li {
-    margin: 0;
+.nav-list li {
+    margin: 0 10px;
 }
 
-nav a {
-    display: block;
-    padding: 10px 20px;
+.nav-list a {
     color: #EEE;
     text-decoration: none;
     font-size: 1.2rem;
-    transition: background-color 0.3s, color 0.3s;
+    transition: color 0.3s, background-color 0.3s, transform 0.3s;
+    position: relative;
 }
 
-nav a:hover {
+.nav-list a::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
     background-color: #ead47b;
-    color: #090808;
+    bottom: -4px;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 1.5s;
 }
 
-/* Effet d'animation sur les liens */
-@keyframes slideIn {
-    from {
-        transform: translateX(-20px);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
+.nav-list a:hover {
+    color: #fce991;
+    background-color: rgba(188, 149, 107, 0.2);
+    transform: scale(1.05);
+}
+
+.nav-list a:hover::before {
+    transform: scaleX(1);
 }
 
 /* Styles pour la version responsive */
 @media screen and (max-width: 768px) {
-    nav ul {
+    .navbar-toggler {
+        display: block;
+    }
+
+    .nav-list {
+        display: none;
         flex-direction: column;
-        align-items: center;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: #090808;
+        border-radius: 0 0 10px 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-list.show {
+        display: flex;
+    }
+
+    .nav-list li {
+        margin: 10px 0;
         text-align: center;
     }
 
-    nav li {
-        margin: 10px 0;
+    .navbar-toggler .bar {
+        background-color: #EEE;
     }
 }

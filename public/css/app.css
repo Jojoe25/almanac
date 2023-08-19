@@ -28,6 +28,7 @@ a {
 .icon-and-text {
     display: flex;
     align-items: center;
+    margin-top: 70px; /* Ajout d'une marge pour éviter que la navbar prenne le dessus sur le logo. */
 }
 
 a:hover {

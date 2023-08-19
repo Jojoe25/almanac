@@ -18,14 +18,21 @@
 </head>
 
 <body>
+<script>
+    function toggleNav() {
+        var navList = document.getElementById("navList");
+        navList.classList.toggle("show");
+    }
+</script>
 
     <div class="container">
         <header>
+            {% include('inc/nav.html.twig') %}
             <h1 class="icon-and-text">
                 <div class="text-left">ALMANAC RETRO GAMING</div>
                 <a href="{{ path('main_home') }}"><img src="{{ asset('img/logo.svg') }}" alt="Almanac!"></a>
             </h1>
-            {% include('inc/nav.html.twig') %}
+
         </header>
 
         {# En plaçant le code pour les messages flash dans la base, on s'assure que peu importe où nous sommes, le message flash s'affichera. #}
