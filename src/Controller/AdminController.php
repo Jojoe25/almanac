@@ -45,7 +45,16 @@ class AdminController extends AbstractController
         if (!$user) {
             throw $this->createNotFoundException('User not found');
         }
-        $form = $this->createForm(EditUserType::class, $user);
+
+        // Vérifiez si l'utilisateur a le rôle "ADMIN"
+        if (in_array('ROLE_ADMIN', $user->getRoles())) {
+            // Si l'utilisateur a le rôle "ADMIN", ne permettez pas la modification du rôle
+            $form = $this->createForm(EditUserType::class, $user, ['disable_admin_role' => true]);
+        } else {
+            // Sinon, permettez la modification normale
+            $form = $this->createForm(EditUserType::class, $user);
+        }
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -53,7 +62,8 @@ class AdminController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->addFlash('message', 'Utilisateur modifié avec succès');
+            // On ajoute un message flash de succès pour indiquer que l'utilisateur a été modifié.
+            $this->addFlash('success', 'Utilisateur modifié avec succès ');
             return $this->redirectToRoute('admin_utilisateurs');
         }
 

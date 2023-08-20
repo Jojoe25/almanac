@@ -27,13 +27,20 @@ class EditUserType extends AbstractType
             ])
             ->add('roles', ChoiceType::class, [
                 'choices' => [
-                    'Utilisateur' => 'ROLE_USER',
-                    'Editeur' => 'ROLE_EDITOR',
-                    'Administrateur' => 'ROLE_ADMIN'
+                    'User' => 'ROLE_USER',
+                    'Editor' => 'ROLE_EDITOR',
+                    'Admin' => 'ROLE_ADMIN'
                 ],
                 'expanded' => true,
                 'multiple' => true,
-                'label' => 'Rôles'
+                'label' => 'Rôles',
+                // Ajoutez une option 'disabled' pour les rôles autres que 'Admin' si nécessaire
+                'choice_attr' => function($choice, $key, $value) use ($options) {
+                    if ($options['disable_admin_role'] && $value !== 'ROLE_ADMIN') {
+                        return ['disabled' => 'disabled'];
+                    }
+                    return [];
+                },
             ])
             ->add('valider', SubmitType::class)
         ;
@@ -43,6 +50,7 @@ class EditUserType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'disable_admin_role' => false, // Par défaut, la modification du rôle "admin" est autorisée
         ]);
     }
 }

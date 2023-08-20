@@ -4,13 +4,14 @@
 
 {% block body %}
     <h1>Liste des utilisateurs</h1>
-    <table>
+    <table class="users-list">
         <thead>
-        <th>ID</th>
-        <th>Email</th>
-        <th>Rôles</th>
-        <th>Articles</th>
-        <th>Actions</th>
+        <tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Rôles</th>
+            <th>Actions</th>
+        </tr>
         </thead>
         <tbody>
         {# On boucle sur les utilisateurs #}
@@ -22,19 +23,20 @@
                     {# On boucle sur les rôles #}
                     {% for role in user.roles %}
                         {% if role == "ROLE_USER" %}
-                            Utilisateur
+                            User
                         {% elseif role == "ROLE_EDITOR" %}
-                            Editeur
+                            Editor
                         {% elseif role == "ROLE_ADMIN" %}
-                            Administrateur
+                            Admin
                         {% endif %}
                     {% endfor %}
                 </td>
                 <td><a href="{{ path('admin_modifier_utilisateur', {'id': user.id}) }}">Modifier</a></td>
             </tr>
-
         {% else %}
-            <p>Aucun utilisateur inscrit</p>
+            <tr>
+                <td colspan="4">Aucun utilisateur inscrit</td>
+            </tr>
         {% endfor %}
         </tbody>
     </table>

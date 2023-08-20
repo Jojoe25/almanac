@@ -120,17 +120,6 @@ class GameType extends AbstractType
                 'required' => false,
                 'mapped' => false, // Indiquez que ce champ n'est pas lié directement à une propriété de l'entité
             ])
-
-            /*->add('backdrop', FileType::class, [
-                'label' => 'Backdrop Image',
-                'required' => false,
-                'mapped' => false, // Indiquez que ce champ n'est pas lié directement à une propriété de l'entité)
-            ])
-            ->add('poster', FileType::class, [
-                'label' => 'poster Image',
-                'required' => false,
-                'mapped' => false, // Indiquez que ce champ n'est pas lié directement à une propriété de l'entité)
-            ])*/
         ;
     }
 
