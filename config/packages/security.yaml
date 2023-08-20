@@ -45,7 +45,9 @@ security:
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/gamescreate$, roles: ROLE_EDITOR }
-        - { path: ^/walkthrough/create$, roles: ROLE_EDITOR }
+        - { path: ^/walkthroughcreate$, roles: ROLE_EDITOR }
+        - { path: ^/games, roles: ROLE_USER }
+
 
 when@test:
     security:

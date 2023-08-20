@@ -10,10 +10,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/walkthrough", name="walkthrough_")
+ */
 class WalkthroughController extends AbstractController
 {
     /**
-     * @Route("/walkthrough/create", name="walkthrough_create")
+     * @Route("create", name="create")
      */
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {

@@ -22,6 +22,7 @@
 
                 {% if is_granted("ROLE_ADMIN") %}
                     <li><a href="{{ path("admin_dashboard") }}" title="Admin dashboard">Admin</a></li>
+                    <li><a href="{{ path("admin_role") }}" title="User list">Role</a></li>
                 {% endif %}
 
             {% else %}
