@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class WalkthroughController extends AbstractController
 {
     /**
-     * @Route("/walktrough/create", name="walktrough_create")
+     * @Route("/walkthrough/create", name="walkthrough_create")
      */
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -37,7 +37,7 @@ class WalkthroughController extends AbstractController
             return $this->redirectToRoute('games_walk', ['id' => $gameId]);
         }
 
-        return $this->render('walktrough/create.html.twig', [
+        return $this->render('walkthrough/create.html.twig', [
             'walkthroughForm' => $walkthroughForm->createView()
         ]);
     }
