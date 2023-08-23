@@ -65,6 +65,11 @@ main {
     object-fit: fill;
 }
 
+.games-list article {
+    display: flex;
+    justify-content: center;
+}
+
 label {
     display: block;
     margin-bottom: 1rem;
@@ -173,10 +178,17 @@ select {
     flex: 0 0 30px; /* Ajustez la hauteur de l'image ici */
 }
 
+.footext {
+    color: black;
+    text-align: center;
+}
+
 @media screen and (min-width: 700px) {
     .game-details {
         grid-template-columns: 300px 1fr;
     }
+
+
 
     /* styles pour le tableau des utilisateurs */
     .users-list {
@@ -268,4 +280,5 @@ select {
     .edit-user-form button:hover {
         background-color: #8C734E;
     }
+
 }

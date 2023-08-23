@@ -18,6 +18,7 @@
 </head>
 
 <body>
+
 <script>
     function toggleNav() {
         var navList = document.getElementById("navList");
@@ -49,8 +50,7 @@
         </main>
 
         <footer>
-            {% include('inc/nav.html.twig') %}
-            <div>&copy; {{ "now"|date("Y") }} Almanac!</div>
+            <div class="footext" >{{ "now"|date("Y") }} Almanac!</div>
         </footer>
     </div>
 

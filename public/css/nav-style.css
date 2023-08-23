@@ -1,17 +1,18 @@
-/* Nouveau style pour la barre de navigation */
+/* style pour le menu */
+
 .navbar {
     background-color: #090808;
     color: #EEE;
-    padding: 10px 0; /* Supprimez la marge horizontale */
+    padding: 10px 0;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     display: flex;
-    justify-content: center; /* Centre horizontalement */
+    justify-content: center;
     align-items: center;
     position: fixed; /* Fixez la barre en haut */
     top: 0;
     left: 0;
     width: 100%; /* Prend toute la largeur de l'écran */
-    z-index: 100; /* Assurez-vous que la barre est au-dessus du contenu */
+    z-index: 100; /* barre always on top par dessus */
 }
 
 .navbar-toggler {
@@ -70,6 +71,7 @@
 }
 
 /* Styles pour la version responsive */
+
 @media screen and (max-width: 768px) {
     .navbar-toggler {
         display: block;
