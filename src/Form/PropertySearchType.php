@@ -30,16 +30,15 @@ class PropertySearchType extends AbstractType
 
         $genres = [];
         foreach ($genresEntities as $genreEntity) {
-            $genres[] = $genreEntity['genres']; // Assurez-vous que 'genres' est la clé correcte
+            $genres[] = $genreEntity['genres'];
         }
 
         $platformsEntities = $this->gameRepository->findDistinctPlatforms();
 
 
-
         $platforms = [];
         foreach ($platformsEntities as $platformEntity) {
-            $platforms[] = $platformEntity['platform']; // Assurez-vous d'utiliser la méthode correcte pour obtenir le nom de la plateforme
+            $platforms[] = $platformEntity['platform'];
         }
 
         $builder

@@ -63,7 +63,7 @@ class GameRepository extends ServiceEntityRepository
         $queryBuilder->leftJoin('g.walkthroughs', 'walk')
             ->addSelect('walk');
 
-        $queryBuilder->andWhere('g.vote > 5');
+        $queryBuilder->andWhere('g.vote > 1');
         $queryBuilder->addOrderBy('g.vote', 'DESC');
         $query = $queryBuilder->getQuery();
 
@@ -112,8 +112,6 @@ class GameRepository extends ServiceEntityRepository
             $query->andWhere('g.platform = :platform')
                 ->setParameter('platform', $propertySearch->getPlatform());
         }
-
-        // Ajoutez d'autres conditions de filtrage facultatives ici si nÃ©cessaire
 
         return $query->getQuery()->getResult();
     }

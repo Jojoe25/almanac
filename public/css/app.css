@@ -130,14 +130,29 @@ select {
 
 .filtres .container {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start; /* Aligner le contenu en haut à gauche */
+    justify-content: flex-start; /* Aligner le contenu à gauche */
 }
 
 .filtres form {
     display: flex;
     flex-direction: column;
-    align-items: center;
+}
+
+.filtres select {
+    padding: 10px;
+    border: 1px solid #CCC;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    width: 100%;
+    max-width: 250px; /* Ajustez la largeur */
+}
+
+/* Ajustez la taille des filtres "platform" et "genres" */
+.filtres select[name="platform"],
+.filtres select[name="genres"] {
+    width: 100%; /* Remplir la largeur du conteneur */
+    max-width: 350px; /* Ajustez la largeur maximale */
 }
 
 .filtres button {
@@ -165,10 +180,8 @@ select {
 
 .image-container {
     background-image: url('https://e0.pxfuel.com/wallpapers/467/46/desktop-wallpaper-retro-wave-resolution-background-and-1600x1200-retro-gaming.jpg');
-    background-size: contain;
-    background-position: right center;
-    background-repeat: no-repeat;
-    display: flex;
+    background-position: center;
+    background-size: cover;
     align-items: center;
 }
 
@@ -176,6 +189,12 @@ select {
 .image-container::before {
     content: '';
     flex: 0 0 30px; /* Ajustez la hauteur de l'image ici */
+}
+
+/* Ajustez la largeur de l'image si nécessaire */
+.image-container img {
+    width: 80%; /* Ajustez la largeur de l'image */
+    max-width: 600px; /* Largeur maximale de l'image */
 }
 
 .footext {
@@ -187,8 +206,6 @@ select {
     .game-details {
         grid-template-columns: 300px 1fr;
     }
-
-
 
     /* styles pour le tableau des utilisateurs */
     .users-list {

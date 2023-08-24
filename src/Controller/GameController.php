@@ -11,12 +11,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @Route("/games", name="games_")
  */
 class GameController extends AbstractController
 {
+    private $doctrine;
+
+    public function __construct(ManagerRegistry $doctrine)
+    {
+        $this->doctrine = $doctrine;
+    }
     /**
      * @Route("", name="list")
      */
@@ -77,7 +84,8 @@ class GameController extends AbstractController
     /**
      * @Route("create", name="create")
      */
-    public function addGame(Request $request)
+    public function addGame(Request $request, ManagerRegistry $doctrine)
+
     {
         $game = new Game();
         $game->setDateCreated(new \DateTime());
@@ -86,42 +94,33 @@ class GameController extends AbstractController
         $gameform->handleRequest($request);
 
         if ($gameform->isSubmitted() && $gameform->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $this->doctrine->getManager();
 
             $backdropFile = $gameform->get('backdrop')->getData();
             if ($backdropFile) {
-                // Generate a unique name for the file
+
                 $backdropFileName = md5(uniqid()) . '.' . $backdropFile->guessExtension();
 
-                // Move the file to the desired location
                 $backdropFile->move(
                     $this->getParameter('kernel.project_dir') . '/public/img/backdrops',
                     $backdropFileName
                 );
 
-                // Set the backdrop property to the filename
                 $game->setBackdrop($backdropFileName);
             }
             $posterFile = $gameform->get('poster')->getData();
             if ($posterFile) {
                 $posterFileName = md5(uniqid()) . '.' . $posterFile->guessExtension();
 
-                // Move the file to the desired location
                 $posterFile->move(
                     $this->getParameter('kernel.project_dir') . '/public/img/posters/games',
                     $posterFileName);
 
                 $game->setPoster($posterFileName);
             }
-
-            // Set other properties from the form
-            // ...
-
-            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($game);
             $entityManager->flush();
 
-            // On ajoute un message flash de succès pour indiquer que le nouveau jeu a été ajouté.
             $this->addFlash('success', 'New Game added! Goodjob!! Lets PLAY!! ;-) ');
 
             return $this->redirectToRoute('games_details', ['id' => $game->getId()]);
@@ -130,9 +129,6 @@ class GameController extends AbstractController
         return $this->render('games/create.html.twig', [
             'gameForm' => $gameform->createView()]);
     }
-
-
-
 
     /*  private function uploadFile($file)
       {

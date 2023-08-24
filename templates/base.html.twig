@@ -19,13 +19,6 @@
 
 <body>
 
-<script>
-    function toggleNav() {
-        var navList = document.getElementById("navList");
-        navList.classList.toggle("show");
-    }
-</script>
-
     <div class="container">
         <header>
             {% include('inc/nav.html.twig') %}
@@ -53,6 +46,13 @@
             <div class="footext" >{{ "now"|date("Y") }} Almanac!</div>
         </footer>
     </div>
+
+    <script>
+        function toggleNav() {
+            var navList = document.getElementById("navList");
+            navList.classList.toggle("show");
+        }
+    </script>
 
 </body>
 

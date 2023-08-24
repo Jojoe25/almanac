@@ -4,13 +4,13 @@
 
     <div class="filtres image-container">
         <div class="container">
-            {{form_start(searchForm)}} {# form start pour ouvrir la balise form #}
+            {{form_start(searchForm)}}
 
-            {{form_widget(searchForm)}} {# form widget pour afficher tout mes champs d'un coup #}
+            {{form_widget(searchForm)}}
 
-            <button>Search !</button> {# bouton submit. #}
+            <button>Search !</button>
 
-            {{form_end(searchForm)}} {# form end pour fermer la balise form #}
+            {{form_end(searchForm)}}
 
         </div>
     </div>
@@ -34,3 +34,4 @@
 {% block title %}
 The best Retro Games | {{ parent() }}
 {% endblock %}
+
