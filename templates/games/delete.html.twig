@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Supprimer des jeux{% endblock %}
+
+{% block body %}
+
+    <form method="post">
+        <h1>Liste des jeux :</h1>
+        <button type="submit">Supprimer sélection</button>
+        <table class="delete-list">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Date de Création</th>
+                <th>Cocher Pour Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for game in games %}
+                <tr>
+                    <td>{{ game.id }}</td>
+                    <td>{{ game.name }}</td>
+                    <td>{{ game.dateCreated|date }}</td>
+                    <td>
+                        <label>
+                            <input type="checkbox" name="gamesToDelete[]" value="{{ game.id }}">
+                        </label>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </form>
+
+{% endblock %}

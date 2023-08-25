@@ -7,6 +7,7 @@ use App\Entity\PropertySearch;
 use App\Form\GameType;
 use App\Form\PropertySearchType;
 use App\Repository\GameRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -130,6 +131,33 @@ class GameController extends AbstractController
             'gameForm' => $gameform->createView()]);
     }
 
+    /**
+     * @Route("/delete", name="delete", methods={"GET", "POST"})
+     */
+    public function deleteGames(GameRepository $gameRepository, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        if ($request->isMethod('POST')) {
+            $gamesToDelete = $request->request->get('gamesToDelete', []);
+
+            foreach ($gamesToDelete as $gameId) {
+                $game = $gameRepository->find($gameId);
+                if ($game) {
+                    $entityManager->remove($game);
+                }
+            }
+
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Jeux supprimés avec succès');
+            return $this->redirectToRoute('games_list'); // Redirige vers la liste des jeux
+        }
+
+        $games = $gameRepository->findAll();
+
+        return $this->render('games/delete.html.twig', [
+            "games" => $games,
+        ]);
+    }
     /*  private function uploadFile($file)
       {
           $fileName = uniqid().'.'.$file->guessExtension();

@@ -1,16 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AdminController!{% endblock %}
+{% block title %} AdminController !{% endblock %}
 
 {% block body %}
-
-    <ul class="nav-list" id="navList">
+ <div class="dashboardnav-container">
+    <ul class="dashboardnav-list">
 
 
         {% if app.user %}
 
             {% if is_granted("ROLE_ADMIN") %}
                 <li><a href="{{ path("admin_utilisateurs") }}" title="UsersList">Users-List</a></li>
+                <li><a href="{{ path("games_delete") }}" title="Delete Games">Supprimer des jeux</a></li>
             {% endif %}
 
         {% else %}
@@ -21,6 +22,6 @@
         {% endif %}
 
     </ul>
-
+ </div>
 {% endblock %}
 
